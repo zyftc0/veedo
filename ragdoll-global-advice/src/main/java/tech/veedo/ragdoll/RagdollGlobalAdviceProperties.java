@@ -1,9 +1,7 @@
 package tech.veedo.ragdoll;
 
-import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
-@Data
 @ConfigurationProperties(prefix = "veedo.ragdoll")
 public class RagdollGlobalAdviceProperties {
 
@@ -11,7 +9,22 @@ public class RagdollGlobalAdviceProperties {
 
     private ExceptionAdvice exceptionAdvice;
 
-    @Data
+    public GlobalAdvice getGlobalAdvice() {
+        return globalAdvice;
+    }
+
+    public void setGlobalAdvice(GlobalAdvice globalAdvice) {
+        this.globalAdvice = globalAdvice;
+    }
+
+    public ExceptionAdvice getExceptionAdvice() {
+        return exceptionAdvice;
+    }
+
+    public void setExceptionAdvice(ExceptionAdvice exceptionAdvice) {
+        this.exceptionAdvice = exceptionAdvice;
+    }
+
     public static class GlobalAdvice {
 
         /**
@@ -24,9 +37,23 @@ public class RagdollGlobalAdviceProperties {
          */
         private String ignoreMethods;
 
+        public Boolean getEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+        }
+
+        public String getIgnoreMethods() {
+            return ignoreMethods;
+        }
+
+        public void setIgnoreMethods(String ignoreMethods) {
+            this.ignoreMethods = ignoreMethods;
+        }
     }
 
-    @Data
     public static class ExceptionAdvice {
 
         /**
@@ -34,6 +61,13 @@ public class RagdollGlobalAdviceProperties {
          */
         private Boolean enabled = false;
 
+        public Boolean getEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(Boolean enabled) {
+            this.enabled = enabled;
+        }
     }
 
 

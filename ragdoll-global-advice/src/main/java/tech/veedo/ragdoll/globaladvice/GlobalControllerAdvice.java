@@ -1,9 +1,6 @@
 package tech.veedo.ragdoll.globaladvice;
 
 import com.alibaba.fastjson.JSON;
-import lombok.Data;
-import lombok.experimental.Accessors;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -14,13 +11,19 @@ import tech.veedo.ragdoll.exception.ExceptionAdviceEntity;
 
 import java.util.Arrays;
 
-@Slf4j
-@Data
-@Accessors(chain = true)
 @RestControllerAdvice
 public class GlobalControllerAdvice implements ResponseBodyAdvice {
 
     private String[] ignoreMethods;
+
+    public String[] getIgnoreMethods() {
+        return ignoreMethods;
+    }
+
+    public GlobalControllerAdvice setIgnoreMethods(String[] ignoreMethods) {
+        this.ignoreMethods = ignoreMethods;
+        return this;
+    }
 
     public GlobalControllerAdvice(String[] ignoreMethods) {
         this.ignoreMethods = ignoreMethods;
