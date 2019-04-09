@@ -27,9 +27,17 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
+        <!-- 统一数据结构返回和异常拦截处理插件 -->
         <dependency>
             <groupId>tech.veedo.plugins</groupId>
             <artifactId>ragdoll-global-advice</artifactId>
+            <version>2019.4.8.RELEASE</version>
+        </dependency>
+
+        <!-- 工作流插件 -->
+        <dependency>
+            <groupId>tech.veedo.plugins</groupId>
+            <artifactId>munchkin-workflow</artifactId>
             <version>2019.4.8.RELEASE</version>
         </dependency>
     </dependencies>
