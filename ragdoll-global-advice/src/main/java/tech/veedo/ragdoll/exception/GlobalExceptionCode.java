@@ -1,5 +1,8 @@
 package tech.veedo.ragdoll.exception;
 
+import lombok.Getter;
+
+@Getter
 public enum GlobalExceptionCode {
 
     COMMON(300, "统一标准异常"),
@@ -12,14 +15,6 @@ public enum GlobalExceptionCode {
     GlobalExceptionCode(Integer errorCode, String detailMessage) {
         this.errorCode = errorCode;
         this.detailMessage = detailMessage;
-    }
-
-    public Integer getErrorCode() {
-        return this.errorCode;
-    }
-
-    public String getDetailMessage() {
-        return this.detailMessage;
     }
 
 }

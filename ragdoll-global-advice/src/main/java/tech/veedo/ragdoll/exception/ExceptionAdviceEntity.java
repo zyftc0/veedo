@@ -1,5 +1,10 @@
 package tech.veedo.ragdoll.exception;
 
+import lombok.Data;
+import lombok.experimental.Accessors;
+
+@Data
+@Accessors(chain = true)
 public class ExceptionAdviceEntity {
 
     /**
@@ -17,30 +22,4 @@ public class ExceptionAdviceEntity {
      */
     private String msg = "调用接口成功";
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    protected ExceptionAdviceEntity setSuccess(boolean success) {
-        this.success = success;
-        return this;
-    }
-
-    public Integer getStatusCode() {
-        return statusCode;
-    }
-
-    protected ExceptionAdviceEntity setStatusCode(Integer statusCode) {
-        this.statusCode = statusCode;
-        return this;
-    }
-
-    public String getMsg() {
-        return msg;
-    }
-
-    protected ExceptionAdviceEntity setMsg(String msg) {
-        this.msg = msg;
-        return this;
-    }
 }

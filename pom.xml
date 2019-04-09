@@ -11,6 +11,7 @@
     <modules>
         <module>ragdoll-global-advice</module>
         <module>veedo-spring-boot-starter</module>
+        <module>munchkin-workflow</module>
     </modules>
 
 
