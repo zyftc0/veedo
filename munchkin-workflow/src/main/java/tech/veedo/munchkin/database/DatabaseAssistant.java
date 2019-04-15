@@ -16,6 +16,15 @@ public class DatabaseAssistant implements DisposableBean {
 
     private QueryRunner queryRunner;
 
+    public int insert() {
+
+        return 1;
+    }
+
+
+
+
+
     public DatabaseAssistant(MunchkinWorkflowProperties munchkinWorkflowProperties) {
         log.info("workflow's db properties is : {}", JSON.toJSONString(munchkinWorkflowProperties.getWfDatesource()));
         if (munchkinWorkflowProperties.getWfDatesource().getDataSourceClassName() == null) {
@@ -25,15 +34,6 @@ public class DatabaseAssistant implements DisposableBean {
         queryRunner = new QueryRunner(hikariDataSource);
         log.info("the DatabaseAssistant inited completed.");
     }
-
-//    public int insert() {
-//        try {
-//            queryRunner.insert()
-//        } catch (SQLException e) {
-//            log.error("DatabaseAssistant insert error ...", e);
-//            return -1;
-//        }
-//    }
 
     /**
      * Invoked by the containing {@code BeanFactory} on destruction of a bean.
