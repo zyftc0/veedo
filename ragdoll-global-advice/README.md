@@ -9,7 +9,7 @@ veedo:
   # 统一拦截配置模块
   ragdoll:
     # 统一拦截返回数据结构处理
-    common-advice:
+    global-advice:
       # 是否启用，默认为false
       enabled: true
       # 不需要使用统一拦截的方法名，多个则用逗号链接

@@ -35,11 +35,11 @@
         </dependency>
 
         <!-- 工作流插件 -->
-        <dependency>
-            <groupId>tech.veedo.plugins</groupId>
-            <artifactId>munchkin-workflow</artifactId>
-            <version>2019.4.8.RELEASE</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>tech.veedo.plugins</groupId>-->
+            <!--<artifactId>munchkin-workflow</artifactId>-->
+            <!--<version>2019.4.8.RELEASE</version>-->
+        <!--</dependency>-->
     </dependencies>
 
 
