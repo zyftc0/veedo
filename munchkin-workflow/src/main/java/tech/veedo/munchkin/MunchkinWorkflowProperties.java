@@ -17,6 +17,7 @@ public class MunchkinWorkflowProperties {
 
     private WfDatesource wfDatesource;
 
-    public class WfDatesource extends HikariConfig {}
+    @Data
+    public static class WfDatesource extends HikariConfig {}
 
 }

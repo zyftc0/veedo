@@ -20,8 +20,13 @@ public class RagdollGlobalAdviceAutoConfiguration {
     @ConditionalOnMissingBean(GlobalControllerAdvice.class)
     @ConditionalOnProperty(prefix = "veedo.ragdoll.global-advice", name = "enabled", havingValue = "true")
     public GlobalControllerAdvice generateCommonControllerAdvice() {
-        String[] ignoreMethods = ragdollGlobalAdviceProperties.getGlobalAdvice().getIgnoreMethods().split(",");
-        return new GlobalControllerAdvice(ignoreMethods);
+        String str = ragdollGlobalAdviceProperties.getGlobalAdvice().getIgnoreMethods();
+        if (str == null || str == "") {
+            return new GlobalControllerAdvice(null);
+        } else {
+            String[] ignoreMethods = str.split(",");
+            return new GlobalControllerAdvice(ignoreMethods);
+        }
     }
 
     @Bean

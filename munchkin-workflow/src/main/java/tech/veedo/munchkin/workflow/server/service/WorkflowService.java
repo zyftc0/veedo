@@ -4,6 +4,7 @@ package tech.veedo.munchkin.workflow.server.service;
 
 import tech.veedo.munchkin.workflow.server.entity.Workflow;
 
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public interface WorkflowService {
      *
      * @return
      */
-    List<Workflow> queryWorkflowList();
+    List<Workflow> queryWorkflowList() throws SQLException;
 
     /**
      * 保存

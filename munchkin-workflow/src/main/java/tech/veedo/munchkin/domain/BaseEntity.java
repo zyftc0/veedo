@@ -3,6 +3,7 @@ package tech.veedo.munchkin.domain;
 import lombok.Data;
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Date;
 
 @Data
 public class BaseEntity implements Serializable {
@@ -25,7 +26,7 @@ public class BaseEntity implements Serializable {
     /**
      * 创建时间
      */
-    public LocalDateTime createTime;
+    public Date createTime;
 
     /**
      * 修改人sub信息

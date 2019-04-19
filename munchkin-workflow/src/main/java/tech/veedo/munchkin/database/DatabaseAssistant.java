@@ -8,7 +8,6 @@ import org.springframework.beans.factory.BeanInitializationException;
 import org.springframework.beans.factory.DisposableBean;
 import tech.veedo.munchkin.MunchkinWorkflowProperties;
 
-
 @Slf4j
 public class DatabaseAssistant implements DisposableBean {
 
@@ -16,19 +15,14 @@ public class DatabaseAssistant implements DisposableBean {
 
     private QueryRunner queryRunner;
 
-    public int insert() {
-
-        return 1;
+    public QueryRunner getQueryRunner() {
+        return queryRunner;
     }
-
-
-
-
 
     public DatabaseAssistant(MunchkinWorkflowProperties munchkinWorkflowProperties) {
         log.info("workflow's db properties is : {}", JSON.toJSONString(munchkinWorkflowProperties.getWfDatesource()));
-        if (munchkinWorkflowProperties.getWfDatesource().getDataSourceClassName() == null) {
-            throw new BeanInitializationException("Init DatabaseAssistant Error. please fill the data-source-class-name property");
+        if (munchkinWorkflowProperties.getWfDatesource().getJdbcUrl() == null) {
+            throw new BeanInitializationException("Init DatabaseAssistant Error. please fill the jdbc-url property");
         }
         hikariDataSource = new HikariDataSource(munchkinWorkflowProperties.getWfDatesource());
         queryRunner = new QueryRunner(hikariDataSource);
@@ -43,7 +37,7 @@ public class DatabaseAssistant implements DisposableBean {
      */
     @Override
     public void destroy() throws Exception {
-        hikariDataSource.close();
+//        hikariDataSource.close();
         log.info("the workflow plugin's {} CP is destroyed.", "Hikari");
     }
 }
