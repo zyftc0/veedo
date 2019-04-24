@@ -63,7 +63,7 @@ public class GlobalControllerAdvice implements ResponseBodyAdvice {
 
         if (!(body instanceof GlobalAdviceEntity || body instanceof ExceptionAdviceEntity)) {
             if (body == null) {
-                return JSON.toJSONString(new GlobalAdviceEntity().setData("null"));
+                return new GlobalAdviceEntity();
             }
             if (body instanceof String) {
                 return JSON.toJSONString(new GlobalAdviceEntity().setData(body));

@@ -20,6 +20,6 @@ public class ExceptionAdviceEntity {
     /**
      * 响应信息
      */
-    private String msg = "调用接口成功";
+    private String message = "调用接口成功";
 
 }
