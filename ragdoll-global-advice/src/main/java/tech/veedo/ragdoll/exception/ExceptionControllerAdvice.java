@@ -30,7 +30,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
         return new ExceptionAdviceEntity()
                 .setSuccess(false)
                 .setStatusCode(code)
-                .setMsg(msg);
+                .setMessage(msg);
     }
 
     private HttpStatus getStatus(HttpServletRequest request) {
