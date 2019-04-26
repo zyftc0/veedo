@@ -5,7 +5,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-class GlobalAdviceEntity {
+public class GlobalAdviceEntity {
 
     /**
      * 响应状态码

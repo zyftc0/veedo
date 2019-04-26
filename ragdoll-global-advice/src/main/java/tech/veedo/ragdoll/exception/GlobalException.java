@@ -31,4 +31,9 @@ public class GlobalException extends Exception {
         this.detailMessage = detailMessage;
     }
 
+    public GlobalException(Integer customErrorCode, String detailMessage) {
+        this.errorCode = customErrorCode;
+        this.detailMessage = detailMessage;
+    }
+
 }
