@@ -7,7 +7,7 @@
     <groupId>tech.veedo.plugins</groupId>
     <artifactId>veedo</artifactId>
     <packaging>pom</packaging>
-    <version>2019.4.8.RELEASE</version>
+    <version>2019.4.28.RELEASE</version>
     <modules>
         <module>ragdoll-global-advice</module>
         <module>veedo-spring-boot-starter</module>

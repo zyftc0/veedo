@@ -12,6 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 @RestControllerAdvice
 public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
+//    private String[] basePackages;
+//
+//    public String[] getBasePackages() {
+//        return basePackages;
+//    }
+//
+//    public void setBasePackages(String[] basePackages) {
+//        this.basePackages = basePackages;
+//    }
+
+
     @ExceptionHandler(GlobalException.class)
     @ResponseBody
     public ExceptionAdviceEntity globalExceptionHanlder(GlobalException ex) {

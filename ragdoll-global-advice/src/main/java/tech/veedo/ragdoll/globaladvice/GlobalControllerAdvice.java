@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 import tech.veedo.ragdoll.exception.ExceptionAdviceEntity;
 
+import java.lang.reflect.Member;
 import java.util.Arrays;
 
 @Getter
@@ -17,6 +18,16 @@ import java.util.Arrays;
 public class GlobalControllerAdvice implements ResponseBodyAdvice {
 
     private String[] ignoreMethods;
+
+    private String[] basePackages;
+
+    public String[] getBasePackages() {
+        return basePackages;
+    }
+
+    public void setBasePackages(String[] basePackages) {
+        this.basePackages = basePackages;
+    }
 
     public void setIgnoreMethods(String[] ignoreMethods) {
         this.ignoreMethods = ignoreMethods;
@@ -37,11 +48,18 @@ public class GlobalControllerAdvice implements ResponseBodyAdvice {
      */
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        if (ignoreMethods == null || ignoreMethods.length <= 0){
-            return true;
+        if (ignoreMethods != null || ignoreMethods.length > 0){
+            Member m = returnType.getMember();
+            String classPath = m.getDeclaringClass().getPackage().getName();
+            String methodName = m.getName();
+
+            if (Arrays.stream(basePackages).anyMatch(basePackage -> basePackage.equals(classPath)) &&
+                    Arrays.stream(ignoreMethods).noneMatch(ignoreMethod -> ignoreMethod.equals(methodName)))
+                return true;
+            else
+                return false;
         } else {
-            String methodName = returnType.getMember().getName();
-            return Arrays.stream(ignoreMethods).noneMatch(ignoreMethod -> ignoreMethod.equals(methodName));
+            return true;
         }
     }
 

@@ -42,7 +42,7 @@ class RagdollProperties {
         /**
          * 返回统一拦截的包路径，如果没有，则全局返回
          */
-        private String basePackages;
+//        private String basePackages;
 
     }
 

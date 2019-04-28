@@ -6,7 +6,7 @@
 
     <groupId>tech.veedo.plugins</groupId>
     <artifactId>veedo-spring-boot-starter</artifactId>
-    <version>2019.4.19.RELEASE</version>
+    <version>2019.4.28.RELEASE</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

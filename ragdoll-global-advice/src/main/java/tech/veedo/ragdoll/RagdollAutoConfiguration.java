@@ -33,7 +33,10 @@ public class RagdollAutoConfiguration {
             advice.setIgnoreMethods(str.split(","));
         }
         String basePackages = ragdollProperties.getGlobalAdvice().getBasePackages();
-        return returnAdivce(advice, basePackages);
+        if (StringUtils.isNotBlank(basePackages)) {
+            advice.setBasePackages(basePackages.split(","));
+        }
+        return advice;
     }
 
     @Bean
@@ -41,45 +44,11 @@ public class RagdollAutoConfiguration {
     @ConditionalOnProperty(prefix = "veedo.ragdoll.exception-advice", name = "enabled", havingValue = "true")
     public ExceptionControllerAdvice generateExceptionControllerAdvice() {
         ExceptionControllerAdvice advice = new ExceptionControllerAdvice();
-        String basePackages = ragdollProperties.getExceptionAdvice().getBasePackages();
-        return returnAdivce(advice, basePackages);
-    }
-
-    /**
-     * 把扫描路径加入Advice中
-     * @param advice
-     * @param basePackages
-     * @param <T>
-     * @return
-     */
-    private <T> T returnAdivce(T advice, String basePackages) {
-        if (StringUtils.isNotBlank(basePackages)) {
-            Annotation annotation = advice.getClass().getAnnotation(RestControllerAdvice.class);
-            try {
-                setAnnotationValue(annotation, "basePackages", basePackages);
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-        }
-
+//        String basePackages = ragdollProperties.getExceptionAdvice().getBasePackages();
+//        if (StringUtils.isNotBlank(basePackages)) {
+//            advice.setBasePackages(basePackages.split(","));
+//        }
         return advice;
-    }
-
-    /**
-     * 设置注解中的字段值
-     *
-     * @param annotation 要修改的注解实例
-     * @param fieldName  要修改的注解字段名
-     * @param value      要设置的值
-     */
-    private void setAnnotationValue(Annotation annotation, String fieldName, Object value) throws NoSuchFieldException, IllegalAccessException {
-        InvocationHandler handler = Proxy.getInvocationHandler(annotation);
-        Field hField = handler.getClass().getDeclaredField("memberValues");
-        hField.setAccessible(true);
-        Map memberValues = (Map) hField.get(handler);
-        memberValues.put(fieldName, value);
     }
 
 }
