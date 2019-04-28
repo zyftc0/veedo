@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  tech.veedo.ragdoll.RagdollGlobalAdviceAutoConfiguration
+  tech.veedo.ragdoll.RagdollAutoConfiguration

@@ -18,6 +18,10 @@ public class GlobalControllerAdvice implements ResponseBodyAdvice {
 
     private String[] ignoreMethods;
 
+    public void setIgnoreMethods(String[] ignoreMethods) {
+        this.ignoreMethods = ignoreMethods;
+    }
+
     public GlobalControllerAdvice(String[] ignoreMethods) {
         this.ignoreMethods = ignoreMethods;
     }
