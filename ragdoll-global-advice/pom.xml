@@ -6,7 +6,7 @@
 
     <groupId>tech.veedo.plugins</groupId>
     <artifactId>ragdoll-global-advice</artifactId>
-        <version>2019.4.28.RELEASE</version>
+    <version>2019.5.3.RELEASE</version>
 
     <parent>
         <groupId>org.springframework.boot</groupId>

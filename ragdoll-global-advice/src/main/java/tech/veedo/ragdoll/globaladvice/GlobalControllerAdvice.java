@@ -48,16 +48,20 @@ public class GlobalControllerAdvice implements ResponseBodyAdvice {
      */
     @Override
     public boolean supports(MethodParameter returnType, Class converterType) {
-        if (ignoreMethods != null || ignoreMethods.length > 0){
-            Member m = returnType.getMember();
+        Member m = returnType.getMember();
+        if (basePackages != null && basePackages.length > 0) {
             String classPath = m.getDeclaringClass().getPackage().getName();
-            String methodName = m.getName();
+            return Arrays.stream(this.basePackages)
+                    .anyMatch((basePackage) -> basePackage.equals(classPath)) ? this.ignore(m) : false;
+        } else {
+            return ignore(m);
+        }
+    }
 
-            if (Arrays.stream(basePackages).anyMatch(basePackage -> basePackage.equals(classPath)) &&
-                    Arrays.stream(ignoreMethods).noneMatch(ignoreMethod -> ignoreMethod.equals(methodName)))
-                return true;
-            else
-                return false;
+    private boolean ignore(Member m) {
+        if (ignoreMethods != null && ignoreMethods.length > 0) {
+            String methodName = m.getName();
+            return !Arrays.stream(this.ignoreMethods).anyMatch((ignoreMethod) -> ignoreMethod.equals(methodName));
         } else {
             return true;
         }
