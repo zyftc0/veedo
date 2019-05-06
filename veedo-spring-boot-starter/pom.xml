@@ -15,6 +15,12 @@
         <relativePath/>
     </parent>
 
+    <properties>
+        <pastoral>2019.5.6.RELEASE</pastoral>
+        <ragdoll>2019.5.3.RELEASE</ragdoll>
+        <munchkin>2019.4.8.RELEASE</munchkin>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -27,11 +33,18 @@
             <artifactId>spring-boot-autoconfigure</artifactId>
         </dependency>
 
+        <!-- 工具集和算法工具集 -->
+        <dependency>
+            <groupId>tech.veedo.plugins</groupId>
+            <artifactId>pastoral-common-utils</artifactId>
+            <version>${pastoral}</version>
+        </dependency>
+
         <!-- 统一数据结构返回和异常拦截处理插件 -->
         <dependency>
             <groupId>tech.veedo.plugins</groupId>
             <artifactId>ragdoll-global-advice</artifactId>
-            <version>2019.4.19.RELEASE</version>
+            <version>${ragdoll}</version>
         </dependency>
 
         <!-- 工作流插件 -->

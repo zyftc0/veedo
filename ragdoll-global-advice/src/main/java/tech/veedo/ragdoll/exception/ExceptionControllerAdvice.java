@@ -247,8 +247,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
     private ExceptionAdviceEntity generateResponseTMP(Integer code, String msg) {
         return new ExceptionAdviceEntity()
-                .setSuccess(false)
-                .setStatusCode(code)
+                .setErrorCode(code)
                 .setMessage(msg);
     }
 

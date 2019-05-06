@@ -8,18 +8,25 @@ import lombok.experimental.Accessors;
 public class ExceptionAdviceEntity {
 
     /**
-     * 响应状态码
-     */
-    private boolean success = true;
-
-    /**
      * 状态码
      */
     private Integer statusCode = 200;
 
     /**
+     * 响应状态码
+     */
+    private boolean success = false;
+
+    /**
+     * 错误码
+     */
+    private Integer errorCode = 300;
+
+    /**
      * 响应信息
      */
     private String message = "调用接口成功";
+
+
 
 }

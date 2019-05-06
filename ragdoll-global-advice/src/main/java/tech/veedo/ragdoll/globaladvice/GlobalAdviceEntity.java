@@ -8,14 +8,14 @@ import lombok.experimental.Accessors;
 public class GlobalAdviceEntity {
 
     /**
-     * 响应状态码
-     */
-    private boolean success = true;
-
-    /**
      * 状态码
      */
     private Integer statusCode = 200;
+
+    /**
+     * 响应状态码
+     */
+    private boolean success = true;
 
     /**
      * 响应信息
