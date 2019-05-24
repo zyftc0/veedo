@@ -1,3 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   tech.veedo.pastoral.PastoralAutoConfiguration,\
-  tech.veedo.pastoral.MathUtils
+  tech.veedo.pastoral.MathUtils,\
+  tech.veedo.pastoral.IdUtils
