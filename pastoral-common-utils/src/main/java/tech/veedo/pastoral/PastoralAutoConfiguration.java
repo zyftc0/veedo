@@ -17,10 +17,12 @@ public class PastoralAutoConfiguration {
     @PostConstruct
     @ConditionalOnProperty(prefix = "veedo.pastoral.snow-flake", name = "enabled", havingValue = "true")
     public void generateIdUtilSnowFlake() {
+        Optional<Long> timestamp = Optional.ofNullable(pastoralProperties.getSnowFlake().getInitTimestamp());
         Optional<Long> opDCID = Optional.ofNullable(pastoralProperties.getSnowFlake().getDataCenterId());
         Optional<Long> opWID = Optional.ofNullable(pastoralProperties.getSnowFlake().getWorkerId());
 
-        IdUtils.generateSnowFlake(opDCID.isPresent()?opDCID.get():0L, opWID.isPresent()?opWID.get():0L);
+        IdUtils.generateSnowFlake(timestamp.isPresent()?timestamp.get():1558695216382L,
+                opDCID.isPresent()?opDCID.get():0L, opWID.isPresent()?opWID.get():0L);
     }
 
 }

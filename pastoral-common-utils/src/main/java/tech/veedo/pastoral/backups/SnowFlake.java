@@ -82,7 +82,7 @@ public class SnowFlake {
             throw new IllegalArgumentException(String.format("SnowFlake.workerId 不能大于 %d 或者小于 0", workerId_MAX));
         }
         log.info("SnowFlake正在初始化...");
-        System.out.printf("SnowFlake初始时间戳：%d, 数据中心编号：%d, 服务器编号：%d, 序列号：%d ...",
+        System.out.printf("SnowFlake初始时间戳：%d, 数据中心编号：%d, 服务器编号：%d, 序列号：%d ... \n",
                 initTimestamp, dataCenterId, workerId, sequence);
 
         this.initTimestamp = initTimestamp;

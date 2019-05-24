@@ -1,5 +1,6 @@
 package tech.veedo.pastoral;
 
+import lombok.Data;
 import tech.veedo.pastoral.backups.SnowFlake;
 
 import java.util.UUID;
@@ -8,7 +9,17 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * 生成ID的工具类
  */
+@Data
 public class IdUtils {
+
+    private static IdUtils instance = IdUtils.getInstance();
+
+    private static IdUtils getInstance() {
+        if (instance == null) {
+            instance = new IdUtils();
+        }
+        return instance;
+    }
 
     /**
      * 获取32位UUID
@@ -22,19 +33,20 @@ public class IdUtils {
     /**
      * twitter的snowflake算法生成ID，最大存储69年
      */
-    private static SnowFlake snowFlake = null;
+    private SnowFlake snowFlake = null;
 
-    protected static void generateSnowFlake(Long dataCenterId, Long workerId) {
-        if (snowFlake == null) {
-            snowFlake = new SnowFlake(System.currentTimeMillis(), dataCenterId, workerId, 0L);
+    public static SnowFlake generateSnowFlake(Long initTimestamp, Long dataCenterId, Long workerId) {
+        if (instance.snowFlake == null) {
+            instance.snowFlake = new SnowFlake(initTimestamp, dataCenterId, workerId, 0L);
         }
+        return instance.snowFlake;
     }
 
-    public static Long getSFnextId() {
-        if (snowFlake == null) {
-            snowFlake = new SnowFlake(System.currentTimeMillis(), 0L, 0L, 0L);
+    public static Long getSFNextId() {
+        if (instance.snowFlake == null) {
+            instance.snowFlake = new SnowFlake(System.currentTimeMillis(), 0L, 0L, 0L);
         }
-        return snowFlake.nextId();
+        return instance.snowFlake.nextId();
     }
 
 

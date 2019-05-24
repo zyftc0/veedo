@@ -10,9 +10,14 @@ public class PastoralProperties {
     private SnowFlake snowFlake;
 
     @Data
-    protected class SnowFlake {
+    protected static class SnowFlake {
 
         private Boolean enabled = false;
+
+        /**
+         * 初始时间戳
+         */
+        private Long initTimestamp;
 
         /**
          * 数据中心集群ID
