@@ -35,7 +35,7 @@ public class IdUtils {
      */
     private SnowFlake snowFlake = null;
 
-    public static SnowFlake generateSnowFlake(Long initTimestamp, Long dataCenterId, Long workerId) {
+    protected static SnowFlake generateSnowFlake(Long initTimestamp, Long dataCenterId, Long workerId) {
         if (instance.snowFlake == null) {
             instance.snowFlake = new SnowFlake(initTimestamp, dataCenterId, workerId, 0L);
         }
@@ -44,8 +44,9 @@ public class IdUtils {
 
     public static Long getSFNextId() {
         if (instance.snowFlake == null) {
-            instance.snowFlake = new SnowFlake(System.currentTimeMillis(), 0L, 0L, 0L);
+            throw new NullPointerException("SnowFlake未进行初始化，请在yml文件中配置veedo.pastoral.snow-flake相关信息");
         }
+        System.out.println(instance.snowFlake.getInitTimestamp()+"|"+instance.snowFlake.getDataCenterId()+"!"+instance.snowFlake.getWorkerId());
         return instance.snowFlake.nextId();
     }
 

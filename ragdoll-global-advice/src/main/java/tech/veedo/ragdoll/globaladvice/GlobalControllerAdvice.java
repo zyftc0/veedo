@@ -1,7 +1,7 @@
 package tech.veedo.ragdoll.globaladvice;
 
 import com.alibaba.fastjson.JSON;
-import lombok.Getter;
+import lombok.Data;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.server.ServerHttpRequest;
@@ -13,25 +13,13 @@ import tech.veedo.ragdoll.exception.ExceptionAdviceEntity;
 import java.lang.reflect.Member;
 import java.util.Arrays;
 
-@Getter
+@Data
 @RestControllerAdvice
 public class GlobalControllerAdvice implements ResponseBodyAdvice {
 
     private String[] ignoreMethods;
 
     private String[] basePackages;
-
-    public String[] getBasePackages() {
-        return basePackages;
-    }
-
-    public void setBasePackages(String[] basePackages) {
-        this.basePackages = basePackages;
-    }
-
-    public void setIgnoreMethods(String[] ignoreMethods) {
-        this.ignoreMethods = ignoreMethods;
-    }
 
     public GlobalControllerAdvice(String[] ignoreMethods) {
         this.ignoreMethods = ignoreMethods;
