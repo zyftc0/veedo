@@ -12,7 +12,7 @@ import java.util.List;
  * @create: 2019-5-21 14:24
  **/
 @Data
-public class UserInfo {
+public class WorkflowUser {
     // 用户主键
     private String id;
     // 用户名称
@@ -25,10 +25,10 @@ public class UserInfo {
     private String postPath;
     // 用户岗位列表信息
     private List<HashMap<String, Object>> posts;
-    // sub信息
-    private String sub;
     // 政治面貌
     private String politicalStatus;
     // 身份证号
     private String identity;
+    // sub补充信息
+    private String sub;
 }

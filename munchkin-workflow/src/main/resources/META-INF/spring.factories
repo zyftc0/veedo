@@ -1,3 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  tech.veedo.munchkin.MunchkinWorkflowAutoConfiguration,\
-  tech.veedo.munchkin.workflow.server.service.impl.WorkflowServiceImpl
+  tech.veedo.munchkin.MunchkinWorkflowAutoConfiguration

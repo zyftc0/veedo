@@ -3,7 +3,7 @@ package tech.veedo.munchkin.constant;
 import lombok.Getter;
 
 /**
- * 操作类型，适用于各种情况，包括工单类型
+ * 操作类型，用于自动填充工具区别填充字段
  */
 @Getter
 public enum OperateTypeEnum {
