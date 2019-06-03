@@ -42,6 +42,12 @@ public class IdUtils {
         return instance.snowFlake;
     }
 
+    /**
+     * 根据Twitter公司的snowflake算法生成下一个ID
+     * 有序，无重复，效率要比UUID好
+     * 但要在YML文件里配置属性，每台服务器的workid应该不一样
+     * @return
+     */
     public static Long getSFNextId() {
         if (instance.snowFlake == null) {
             throw new NullPointerException("SnowFlake未进行初始化，请在yml文件中配置veedo.pastoral.snow-flake相关信息");
