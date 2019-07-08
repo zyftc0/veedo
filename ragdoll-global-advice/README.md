@@ -12,12 +12,16 @@ veedo:
     global-advice:
       # 是否启用，默认为false
       enabled: true
+      # 返回统一拦截的包路径，如果没有，则全局返回
+      basePackages: e1.xxx.xxxx(,ex2,ex3...)
       # 不需要使用统一拦截的方法名，多个则用逗号链接
       ignore-methods: example1(,ex2,ex3...)
     # 统一异常处理
     exception-advice:
       # 是否启用，默认为false
       enabled: true
+      # 异常打印模式，分为log,stack两种，默认log打印
+      mode: stack
 ```
 > #### 统一异常处理
 在程序中主动抛出异常的操作:
