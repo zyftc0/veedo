@@ -38,10 +38,14 @@ public class RagdollAutoConfiguration {
     @ConditionalOnProperty(prefix = "veedo.ragdoll.exception-advice", name = "enabled", havingValue = "true")
     public ExceptionControllerAdvice generateExceptionControllerAdvice() {
         ExceptionControllerAdvice advice = new ExceptionControllerAdvice();
-//        String basePackages = ragdollProperties.getExceptionAdvice().getBasePackages();
-//        if (StringUtils.isNotBlank(basePackages)) {
-//            advice.setBasePackages(basePackages.split(","));
-//        }
+        String mode = ragdollProperties.getExceptionAdvice().getMode();
+        if (StringUtils.isBlank(mode)) {
+            throw new NullPointerException("统一异常处理打印异常模式（mode）为空");
+        }
+        if (!mode.toLowerCase().equals("log") && !mode.toLowerCase().equals("stack")) {
+            throw new IllegalArgumentException("统一异常处理打印异常模式（mode）的值范围：[log, stack]");
+        }
+        advice.setMode(mode);
         return advice;
     }
 

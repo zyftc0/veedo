@@ -27,6 +27,9 @@ public class ExceptionAdviceEntity {
      */
     private String message = "调用接口成功";
 
-
+    /**
+     * 或有，错误时返回给前台的数据
+     */
+    private Object data;
 
 }

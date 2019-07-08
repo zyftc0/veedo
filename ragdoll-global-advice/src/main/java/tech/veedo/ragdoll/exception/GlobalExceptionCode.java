@@ -36,11 +36,11 @@ public enum GlobalExceptionCode {
 
     private Integer errorCode;
 
-    private String detailMessage;
+    private String message;
 
-    GlobalExceptionCode(Integer errorCode, String detailMessage) {
+    GlobalExceptionCode(Integer errorCode, String message) {
         this.errorCode = errorCode;
-        this.detailMessage = detailMessage;
+        this.message = message;
     }
 
 }

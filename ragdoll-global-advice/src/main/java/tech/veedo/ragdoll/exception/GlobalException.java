@@ -9,31 +9,58 @@ public class GlobalException extends Exception {
     private Integer errorCode;
 
     @Setter
-    private String detailMessage;
+    private String message;
+
+    @Setter
+    private Object data;
 
     public GlobalException() {
         this.errorCode = GlobalExceptionCode.COMMON.getErrorCode();
-        this.detailMessage = GlobalExceptionCode.COMMON.getDetailMessage();
+        this.message = GlobalExceptionCode.COMMON.getMessage();
     }
 
     public GlobalException(GlobalExceptionCode error) {
         this.errorCode = error.getErrorCode();
-        this.detailMessage = GlobalExceptionCode.COMMON.getDetailMessage();
+        this.message = GlobalExceptionCode.COMMON.getMessage();
     }
 
-    public GlobalException(String detailMessage) {
+    public GlobalException(String message) {
         this.errorCode = GlobalExceptionCode.COMMON.getErrorCode();
-        this.detailMessage = detailMessage;
+        this.message = message;
     }
 
-    public GlobalException(GlobalExceptionCode error, String detailMessage) {
+    public GlobalException(Object data) {
+        this.errorCode = GlobalExceptionCode.COMMON.getErrorCode();
+        this.message = GlobalExceptionCode.COMMON.getMessage();
+        this.data = data;
+    }
+
+    public GlobalException(String message, Object data) {
+        this.errorCode = GlobalExceptionCode.COMMON.getErrorCode();
+        this.message = message;
+        this.data = data;
+    }
+
+    public GlobalException(GlobalExceptionCode error, String message) {
         this.errorCode = error.getErrorCode();
-        this.detailMessage = detailMessage;
+        this.message = message;
     }
 
-    public GlobalException(Integer customErrorCode, String detailMessage) {
+    public GlobalException(Integer customErrorCode, String message) {
         this.errorCode = customErrorCode;
-        this.detailMessage = detailMessage;
+        this.message = message;
+    }
+
+    public GlobalException(GlobalExceptionCode error, String message, Object data) {
+        this.errorCode = error.getErrorCode();
+        this.message = message;
+        this.data = data;
+    }
+
+    public GlobalException(Integer customErrorCode, String message, Object data) {
+        this.errorCode = customErrorCode;
+        this.message = message;
+        this.data = data;
     }
 
 }

@@ -40,9 +40,9 @@ class RagdollProperties {
         private Boolean enabled = false;
 
         /**
-         * 返回统一拦截的包路径，如果没有，则全局返回
+         * 错误打印显示模式,默认Log
          */
-//        private String basePackages;
+        private String mode = "log";
 
     }
 
