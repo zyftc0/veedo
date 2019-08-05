@@ -10,7 +10,7 @@ public class ExceptionAdviceEntity {
     /**
      * 状态码
      */
-    private Integer statusCode = 200;
+    private Integer statusCode = 300;
 
     /**
      * 响应状态码
@@ -18,14 +18,9 @@ public class ExceptionAdviceEntity {
     private boolean success = false;
 
     /**
-     * 错误码
-     */
-    private Integer errorCode = 300;
-
-    /**
      * 响应信息
      */
-    private String message = "调用接口成功";
+    private String message = "调用接口异常";
 
     /**
      * 或有，错误时返回给前台的数据

@@ -1,6 +1,5 @@
 package tech.veedo.ragdoll;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -9,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import tech.veedo.ragdoll.exception.ExceptionControllerAdvice;
 import tech.veedo.ragdoll.globaladvice.GlobalControllerAdvice;
+import tech.veedo.ragdoll.utils.StringUtils;
 
 @Configuration
 @EnableConfigurationProperties(RagdollProperties.class)

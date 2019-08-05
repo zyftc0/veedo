@@ -3,14 +3,12 @@ package tech.veedo.ragdoll.exception;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import javax.servlet.http.HttpServletRequest;
+import tech.veedo.ragdoll.utils.StringUtils;
 
 @Slf4j
 @RestControllerAdvice
@@ -173,7 +171,7 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
-    public ExceptionAdviceEntity nullPointerExceptionHanlder(HttpServletRequest request, NullPointerException ex) {
+    public ExceptionAdviceEntity nullPointerExceptionHanlder(NullPointerException ex) {
         showError(ex);
         return generateResponseTMP(GlobalExceptionCode.NULL_POINTER.getErrorCode(), ex.getMessage());
     }
@@ -236,31 +234,22 @@ public class ExceptionControllerAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(Exception.class)
     @ResponseBody
-    public ExceptionAdviceEntity exceptionHanlder(HttpServletRequest request, Throwable ex) {
+    public ExceptionAdviceEntity exceptionHanlder(Throwable ex) {
         showError(ex);
-        HttpStatus status = getStatus(request);
-        return generateResponseTMP(status.value(), ex.getMessage());
+        return generateResponseTMP(GlobalExceptionCode.COMMON.getErrorCode(), ex.getMessage());
     }
 
     private ExceptionAdviceEntity generateResponseTMP(Integer code, String msg) {
         return new ExceptionAdviceEntity()
-                .setErrorCode(code)
+                .setStatusCode(code)
                 .setMessage(msg);
     }
 
     private ExceptionAdviceEntity generateResponseTMPWithData(Integer code, String msg, Object data) {
         return new ExceptionAdviceEntity()
-                .setErrorCode(code)
+                .setStatusCode(code)
                 .setMessage(msg)
                 .setData(data);
-    }
-
-    private HttpStatus getStatus(HttpServletRequest request) {
-        Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        if (statusCode == null) {
-            return HttpStatus.INTERNAL_SERVER_ERROR;
-        }
-        return HttpStatus.valueOf(statusCode);
     }
 
     private void showError(Throwable e) {
