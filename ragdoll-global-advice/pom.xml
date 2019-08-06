@@ -6,7 +6,7 @@
 
     <groupId>tech.veedo.plugins</groupId>
     <artifactId>ragdoll-global-advice</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.1.RELEASE</version>
 
     <name>ragdoll-global-advice</name>
     <description>springboot plugins to process return advise and exception</description>

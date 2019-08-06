@@ -9,7 +9,6 @@
     <packaging>pom</packaging>
     <version>2019.4.28.RELEASE</version>
     <modules>
-        <module>veedo-spring-boot-starter</module>
         <module>ragdoll-global-advice</module>
         <module>munchkin-workflow</module>
         <module>pastoral-common-utils</module>
