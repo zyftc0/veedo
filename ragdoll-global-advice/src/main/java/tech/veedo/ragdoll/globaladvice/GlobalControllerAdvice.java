@@ -12,6 +12,7 @@ import tech.veedo.ragdoll.exception.ExceptionAdviceEntity;
 
 import java.lang.reflect.Member;
 import java.util.Arrays;
+import java.util.Map;
 
 @Data
 @RestControllerAdvice
@@ -81,6 +82,9 @@ public class GlobalControllerAdvice implements ResponseBodyAdvice {
             }
             if (body instanceof String) {
                 return JSON.toJSONString(new GlobalAdviceEntity().setData(body));
+            }
+            if (body instanceof Boolean) {
+                return new GlobalAdviceEntity().setSuccess((Boolean) body);
             }
             return new GlobalAdviceEntity().setData(body);
         }

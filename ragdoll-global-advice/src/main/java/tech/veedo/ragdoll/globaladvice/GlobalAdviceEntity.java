@@ -27,4 +27,27 @@ public class GlobalAdviceEntity {
      */
     private Object data;
 
+    GlobalAdviceEntity() {}
+
+    GlobalAdviceEntity(boolean success, String message) {
+        this.success = success;
+        this.message = message;
+    }
+
+    GlobalAdviceEntity(boolean success, Object data) {
+        this.success = success;
+        this.data = data;
+    }
+
+    GlobalAdviceEntity(String message, Object data) {
+        this.message = message;
+        this.data = data;
+    }
+
+    GlobalAdviceEntity(boolean success, String message, Object data) {
+        this.success = success;
+        this.message = message;
+        this.data = data;
+    }
+
 }
