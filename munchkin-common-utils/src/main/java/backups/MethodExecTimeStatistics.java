@@ -1,42 +1,40 @@
-package tech.veedo.pastoral;
+package backups;
 
+
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
 
+@Slf4j
 public class MethodExecTimeStatistics {
 
     class Timer {
         Long startimePoint;
         Long endtimePoint;
 
-        public Long getStartimePoint() {
+        protected Long getStartimePoint() {
             return startimePoint;
         }
 
-        public Timer setStartimePoint(Long startimePoint) {
+        protected Timer setStartimePoint(Long startimePoint) {
             this.startimePoint = startimePoint;
             return this;
         }
 
-        public Long getEndtimePoint() {
+        protected Long getEndtimePoint() {
             return endtimePoint;
         }
 
-        public Timer setEndtimePoint(Long endtimePoint) {
+        protected Timer setEndtimePoint(Long endtimePoint) {
             this.endtimePoint = endtimePoint;
             return this;
         }
     }
 
-    private Logger logger = Logger.getAnonymousLogger();
-
     private ConcurrentHashMap<String, Timer> timers;
 
     /**
      * 代码片段执行起始时间记录
-     * @param gist
-     * @return
      */
     public boolean start(String gist) {
         if (gist == null || gist.length() <= 0) {
@@ -58,8 +56,6 @@ public class MethodExecTimeStatistics {
 
     /**
      * 代码片段执行终结时间记录
-     * @param gist
-     * @return
      */
     public boolean end(String gist) {
         if (gist == null || gist.length() <= 0) {
@@ -81,29 +77,38 @@ public class MethodExecTimeStatistics {
 
     /**
      * 展示代码片段执行的时长
-     * @param gist
      */
     public void showExecTime(String gist) {
         if (gist == null || gist.length() <= 0) {
-            logger.warning("参数为空");
-        }
+            log.error("参数为空");
+        } else {
+            Timer current;
+            if (timers != null) {
+                current = timers.get(gist);
 
-        Timer current;
-        if (timers != null) {
-            current = timers.get(gist);
-
-            if (current != null) {
-                if (current.getStartimePoint() == null || current.getEndtimePoint() == null) {
-                    logger.warning(gist+"时间记录不完整");
+                if (current != null) {
+                    if (current.getStartimePoint() == null || current.getEndtimePoint() == null) {
+                        log.error(gist+"时间记录不完整");
+                    } else {
+                        log.debug("\n========>>>代码片段 ["+gist+"] 执行时间: "+(current.getEndtimePoint()-current.getStartimePoint())+" ms.");
+                    }
                 } else {
-                    logger.warning("代码片段"+gist+"执行时间："+(current.getEndtimePoint()-current.getStartimePoint())+"ms");
+                    log.error("没有当前名称为"+gist+"的时间记录");
                 }
             } else {
-                logger.warning("没有当前名称为"+gist+"的时间记录");
+                log.error("时间列表为空");
             }
-        } else {
-            logger.warning("时间列表为空");
         }
+    }
+
+    public void showAll() {
+        timers.forEach((s, timer) -> {
+            if (timer.getStartimePoint() == null || timer.getEndtimePoint() == null) {
+                log.error(s+"时间记录不完整");
+            } else {
+                log.debug("\n========>>>代码片段 ["+s+"] 执行时间: "+(timer.getEndtimePoint()-timer.getStartimePoint())+" ms.");
+            }
+        });
     }
 
 }

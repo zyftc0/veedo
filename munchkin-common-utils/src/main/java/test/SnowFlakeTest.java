@@ -1,7 +1,5 @@
-package tech.veedo.pastoral.test;
+package test;
 
-import tech.veedo.pastoral.IdUtils;
-import tech.veedo.pastoral.backups.SnowFlake;
 
 public class SnowFlakeTest {
 

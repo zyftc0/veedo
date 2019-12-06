@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Getter
-public class GlobalException extends Exception {
+public class GlobalException extends RuntimeException {
 
     private Integer errorCode;
 

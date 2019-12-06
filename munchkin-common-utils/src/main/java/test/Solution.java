@@ -1,12 +1,7 @@
 package test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Stack;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * ing: 未解决，解决中
@@ -15,69 +10,66 @@ import java.util.stream.Stream;
 public class Solution {
 
     public static void main(String[] args) {
-//        int[] A = {6, 3, 4, 7, 2, 5, 1, 3};
-//        System.out.println(sumSubarrayMins(A));
-
-        int[] A = {11, 5, 1, 5, 4, 3, 1, 15, 2, 2, 3, 1, 6, 3, 3};
-        combinationSum2(A, 12);
+        System.out.println(longestPalindrome("babad"));
+        System.out.println(longestPalindrome("ccccc"));
+        System.out.println(longestPalindrome("abb"));
+        System.out.println(longestPalindrome("aabb"));
     }
 
     /**
-     * 40 给定一个数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。ing
-     * @param candidates
-     * @param target
+     * 最大长度是1000
+     * @param s
      * @return
      */
-    public static List<List<Integer>> combinationSum2(int[] candidates, int target) {
-        HashMap<Integer, Integer> intAndTimes = new HashMap<>();
-        Arrays.stream(candidates)
-                .filter(v -> v < target)
-                .forEach(v -> {
-                    if (intAndTimes.containsKey(v)) {
-                        intAndTimes.put(v, intAndTimes.get(v)+1);
-                    } else {
-                        intAndTimes.put(v, 1);
-                    }
-                });
+    public static String longestPalindrome(String s) {
+        if (s.length() == 1) return s;
+        if (s.length() == 2 && s.charAt(0) != s.charAt(1)) return s.substring(0, 1);
 
-        return null;
+        AtomicReference<String> re = new AtomicReference<>("");
+
+        for (int i = 0; i < s.length()-1; i++) {
+            int left = i;
+            int right = sureRight(s, left);
+//            if (re.get().length() < (right - left)) {
+//                re.set(s.substring(left, right));
+//            }
+
+            shifting(s, left, right-1, re);
+        }
+
+        return re.get();
     }
 
-    /**
-     * 907 求一个数组的连续子数组的最小数之和 ing
-     * @param A
-     * @return
-     */
-    public static int sumSubarrayMins(int[] A) {
-        int len = A.length;
-
-        if (len <= 0) return 0;
-
-        // 前驱数组
-        int[] pre = new int[len];
-        Stack<Integer> stack = new Stack<>();
-        Stream.iterate(0, i -> i+1).limit(len).forEach(i -> {
-            while (!stack.isEmpty() && A[i] <= A[stack.peek()]) {
-                stack.pop();
+    private static int sureRight(String s, int i) {
+        if (i < s.length()-1) {
+            if (s.charAt(i) == s.charAt(i+1)) {
+                return sureRight(s, i+1);
+            } else {
+                return i+1;
             }
-            pre[i] = stack.isEmpty()?-1:stack.peek();
-            stack.push(i);
-
-        });
-
-        // 后继数组
-        int[] suf = new int[len];
-        Stack<Integer> stack2 = new Stack<>();
-        Stream.iterate(len-1, i -> i-1).limit(len).forEach(i -> {
-            while (!stack2.isEmpty() && A[i] < A[stack2.peek()]) {
-                stack2.pop();
-            }
-            suf[i] = stack2.isEmpty()?len:stack2.peek();
-            stack2.push(i);
-        });
-
-        AtomicInteger sum = new AtomicInteger(0);
-        IntStream.iterate(0, i -> i+1).limit(len).forEach(i -> sum.addAndGet((i-pre[i])*(suf[i]-i)*A[i]));
-        return sum.get();
+        } else {
+            return s.length();
+        }
     }
+
+    private static void shifting(String s, int left, int right, AtomicReference<String> re) {
+        if (s.charAt(left) == s.charAt(right)) {
+            if (left > 0 && right < s.length()-1) {
+                shifting(s, left-1, right+1, re);
+            } else if (left > 0 && right >= s.length()-1) {
+                shifting(s, left-1, right, re);
+            } else if (left <= 0 && right < s.length()-1) {
+                shifting(s, left, right+1, re);
+            } else {
+                re.set(s);
+            }
+        } else {
+            String result = s.substring(left, right+1);
+            if (result.length() > re.get().length()) {
+                re.set(result);
+            }
+        }
+    }
+
+
 }

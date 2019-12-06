@@ -1,7 +1,7 @@
-package tech.veedo.pastoral.backups;
+package backups;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * SnowFlake算法生成id的结果是一个64bit大小的整数
@@ -21,9 +21,9 @@ import lombok.extern.slf4j.Slf4j;
  * 2.整个分布式系统内不会产生重复id（因为有datacenterId和workerId来做区分）
  *
  */
-@Getter
-@Slf4j
+
 public class SnowFlake {
+    Logger logger = LoggerFactory.getLogger(SnowFlake.class);
     /**
      * 初始时间戳
      */
@@ -73,7 +73,7 @@ public class SnowFlake {
      */
     public SnowFlake(Long initTimestamp, Long dataCenterId, Long workerId, Long sequence) {
         if (System.currentTimeMillis() - initTimestamp > 2199023255551L) {
-            log.error("请不要输入过于古老(69年前)的时间戳作为初始时间戳");
+            logger.error("请不要输入过于古老(69年前)的时间戳作为初始时间戳");
         }
         if (dataCenterId > dataCenterId_MAX || dataCenterId < 0) {
             throw new IllegalArgumentException(String.format("SnowFlake.dataCenterId 不能大于 %d or 或者小于 0", dataCenterId_MAX));
@@ -81,8 +81,8 @@ public class SnowFlake {
         if (workerId > workerId_MAX || workerId < 0) {
             throw new IllegalArgumentException(String.format("SnowFlake.workerId 不能大于 %d 或者小于 0", workerId_MAX));
         }
-        log.info("SnowFlake正在初始化...");
-        System.out.printf("SnowFlake初始时间戳：%d, 数据中心编号：%d, 服务器编号：%d, 序列号：%d ... \n",
+        logger.info("SnowFlake正在初始化...");
+        logger.info("SnowFlake初始时间戳：%d, 数据中心编号：%d, 服务器编号：%d, 序列号：%d ...%n",
                 initTimestamp, dataCenterId, workerId, sequence);
 
         this.initTimestamp = initTimestamp;
@@ -132,4 +132,19 @@ public class SnowFlake {
         return System.currentTimeMillis();
     }
 
+    public long getInitTimestamp() {
+        return initTimestamp;
+    }
+
+    public long getDataCenterId() {
+        return dataCenterId;
+    }
+
+    public long getWorkerId() {
+        return workerId;
+    }
+
+    public long getSequence() {
+        return sequence;
+    }
 }

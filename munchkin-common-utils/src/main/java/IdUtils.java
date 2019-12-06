@@ -1,15 +1,8 @@
-package tech.veedo.pastoral;
-
-import lombok.Data;
-import tech.veedo.pastoral.backups.SnowFlake;
+import backups.SnowFlake;
 
 import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
-/**
- * 生成ID的工具类
- */
-@Data
 public class IdUtils {
 
     private static IdUtils instance = IdUtils.getInstance();
@@ -55,7 +48,5 @@ public class IdUtils {
         System.out.println(instance.snowFlake.getInitTimestamp()+"|"+instance.snowFlake.getDataCenterId()+"!"+instance.snowFlake.getWorkerId());
         return instance.snowFlake.nextId();
     }
-
-
 
 }

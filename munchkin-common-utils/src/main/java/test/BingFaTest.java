@@ -1,6 +1,8 @@
-package tech.veedo.pastoral.test;
+package test;
 
-import lombok.extern.slf4j.Slf4j;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
@@ -9,8 +11,9 @@ import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
-@Slf4j
 public class BingFaTest {
+
+    static Logger logger = LoggerFactory.getLogger(BingFaTest.class);
 
     // 请求总数
     public static int clientTotal = 5000;
@@ -45,7 +48,7 @@ public class BingFaTest {
         // 线程阻塞，直到闭锁值为0时，线程才释放，继续往下执行
         countDownLatch.await();
         es.shutdown();
-        log.info("count: {}", count);
+        logger.info("count: {}", count);
     }
 
     public static void add() {
